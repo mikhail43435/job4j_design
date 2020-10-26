@@ -4,19 +4,28 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.source>14</maven.compiler.source>
+    <maven.compiler.target>14</maven.compiler.target>
+  </properties>
+
   <groupId>ru.job4j</groupId>
   <artifactId>job4j_design</artifactId>
-  <version>1.0</version>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>chapter_001</module>
+    <module>chapter_002</module>
+    <module>chapter_003</module>
+    <module>chapter_004</module>
+    <module>chapter_005</module>
+  </modules>
 
   <name>job4j_design</name>
   <description>A simple job4j_design.</description>
   <url>http://www.job4j.com</url>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>14</maven.compiler.source>
-    <maven.compiler.target>14</maven.compiler.target>
-  </properties>
 
   <dependencies>
     <dependency>
