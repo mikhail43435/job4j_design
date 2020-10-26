@@ -22,7 +22,6 @@ public class MatrixItTest {
         int[][] in = {
                 {}, {1}
         };
-        System.out.println(in[0].length);
         MatrixIt it = new MatrixIt(in);
         assertThat(it.next(), is(1));
     }
@@ -64,6 +63,15 @@ public class MatrixItTest {
         };
         MatrixIt it = new MatrixIt(in);
         assertThat(it.hasNext(), is(false));
+    }
+
+    @Test
+    public void whenOneElementhasNext() {
+        int[][] in = {
+                {1}
+        };
+        MatrixIt it = new MatrixIt(in);
+        assertThat(it.hasNext(), is(true));
     }
 
     @Test(expected = NoSuchElementException.class)
