@@ -19,10 +19,7 @@ public class FlatMap<T> implements Iterator<T> {
     public boolean hasNext() {
         if (cursor.hasNext()) {
             return true;
-        } else if (data.hasNext() && data.next().hasNext()) {
-            return true;
-        }
-        return false;
+        } else return data.hasNext() && data.next().hasNext();
     }
 
     @Override
@@ -31,6 +28,8 @@ public class FlatMap<T> implements Iterator<T> {
             throw new NoSuchElementException();
         }
         if (!cursor.hasNext()) {
+            System.out.println(data.getClass());
+            System.out.println(data.hasNext());
             cursor = data.next();
         }
         return cursor.next();
