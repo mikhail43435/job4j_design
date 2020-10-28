@@ -1,10 +1,8 @@
 package ru.job4j.design.iterator;
 
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-
 import org.junit.Test;
-
 import java.util.NoSuchElementException;
 
 public class BackwardArrayItTest {
