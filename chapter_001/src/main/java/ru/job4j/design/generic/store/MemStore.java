@@ -27,7 +27,7 @@ public final class MemStore<T extends Base> implements Store<T> {
     @Override
     public boolean delete(String id) {
         for (T value : mem) {
-            if (value.getId().equals(id)) {
+            if (checkId(value, id)) {
                 mem.remove(value);
                 return true;
             }
@@ -38,9 +38,14 @@ public final class MemStore<T extends Base> implements Store<T> {
     @Override
     public T findById(String id) {
         for (T value : mem) {
-            if (value.getId().equals(id))
+            if (checkId(value, id))
                 return value;
         }
         return null;
-    }
+     }
+
+     private boolean checkId(T value, String id) {
+        return value.getId().equals(id);
+     }
+
 }
