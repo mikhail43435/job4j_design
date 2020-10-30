@@ -5,7 +5,7 @@ import static java.util.Objects.checkIndex;
 
 public class SimpleArray<T> {
     private final T[] data;
-    private int index = -1;
+    private int index ;
     private final int size;
 
     public SimpleArray(int size) {
@@ -14,13 +14,13 @@ public class SimpleArray<T> {
     }
 
     public void add (T value) {
-        if (checkIndex((index + 1 ), size) < size)
-            data[++index] = value;
+        if (checkIndex((index), size) < size)
+            data[index++] = value;
     }
 
     public T get(int indexGet) {
         //if (checkIndex(index, size) < size) {
-        checkIndex(indexGet, index + 1);
+        checkIndex(indexGet, index);
         return data[indexGet];
         /*} else {
             throw new IndexOutOfBoundsException();
@@ -28,18 +28,22 @@ public class SimpleArray<T> {
     }
 
     public void set(int indexSet, T model)  {
-        checkIndex(indexSet, index +1 );
+        checkIndex(indexSet, index);
         data[indexSet] = model;
     }
 
     public void remove(int indexRemove) {
-        checkIndex(indexRemove, index + 1);
-        System.arraycopy(data, indexRemove + 1, data, indexRemove , index - indexRemove );
+        checkIndex(indexRemove, index);
+        System.arraycopy(data, indexRemove + 1, data, indexRemove , index - indexRemove - 1);
         index--;
     }
 
     public int getSize() {
         return size;
+    }
+
+    int getIndex() {
+        return index;
     }
 
     @Override

@@ -13,7 +13,7 @@ public class SimpleArrayIt<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return pointer < data.getSize();
+        return pointer < data.getIndex();
     }
 
     @Override
