@@ -21,6 +21,14 @@ public class SimpleArrayTest {
     }
 
     @Test
+    public void whenCreat100AddThenGet() {
+        SimpleArray<String> array = new SimpleArray<>(100);
+        array.add("first");
+        String rsl = array.get(0);
+        assertThat(rsl, is("first"));
+    }
+
+    @Test
     public void whenAddThenIt() {
         SimpleArray<String> array = new SimpleArray<>();
         array.add("first");

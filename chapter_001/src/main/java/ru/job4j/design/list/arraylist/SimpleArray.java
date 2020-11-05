@@ -13,7 +13,11 @@ public class SimpleArray<T> implements Iterable<T> {
     private int modCount;
 
     public SimpleArray() {
-        data = (T[]) new Object[1];
+        data = (T[]) new Object[10];
+    }
+
+    public SimpleArray(int size) {
+        data = (T[]) new Object[size];
     }
 
     protected int getSize() {
@@ -30,15 +34,13 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void add(T model) {
-        if (size == 0) {
-            data[0] = model;
-            size++;
-        } else {
+        if (size == data.length) {
             T[] tempArray;
             tempArray = data;
-            data = (T[]) new Object[size++];
-            System.arraycopy(tempArray, 0, data, 0, size - 1);
+            data = (T[]) new Object[size + 1];
+            System.arraycopy(tempArray, 0, data, 0, size);
         }
+        data[size++] = model;
         modCount++;
     }
 
