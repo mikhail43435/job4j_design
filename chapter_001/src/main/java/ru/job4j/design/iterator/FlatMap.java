@@ -18,14 +18,10 @@ public class FlatMap<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        while (!cursor.hasNext()) {
-            if (data.hasNext()) {
-                cursor = data.next();
-            } else {
-                return false;
-            }
+        while (data.hasNext() && !cursor.hasNext()) {
+            cursor = data.next();
         }
-        return !(cursor == Collections.emptyIterator());
+        return cursor.hasNext();
     }
 
     @Override
