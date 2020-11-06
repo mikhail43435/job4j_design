@@ -37,7 +37,7 @@ public class SimpleArray<T> implements Iterable<T> {
         if (size == data.length) {
             T[] tempArray;
             tempArray = data;
-            data = (T[]) new Object[size + 1];
+            data = (T[]) new Object[size * 2] ;
             System.arraycopy(tempArray, 0, data, 0, size);
         }
         data[size++] = model;
