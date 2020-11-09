@@ -14,7 +14,7 @@ public class UserStoreTest {
         memStore.add(new User("54"));
         memStore.add(new User("24"));
         User newUser = new User("77");
-        assertThat(memStore.replace("24", newUser ), is(true));
+        assertThat(memStore.replace("24", newUser), is(true));
         assertThat(memStore.findById("77"), is(newUser));
         Assert.assertNull(memStore.findById("24"));
     }
@@ -26,7 +26,7 @@ public class UserStoreTest {
         memStore.add(new User("54"));
         memStore.add(new User("24"));
         User newUser = new User("77");
-        assertThat(memStore.replace("333", newUser ), is(false));
+        assertThat(memStore.replace("333", newUser), is(false));
     }
 
     @Test

@@ -78,7 +78,6 @@ public class LinkedArray<T> implements Iterable<T> {
     }
 
     public class LinkedArrayIt<T> implements Iterator<T> {
-
         private final LinkedArray<T> data;
         private Node<T> pointer;
         private final int expectedModCount;

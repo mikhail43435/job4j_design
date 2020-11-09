@@ -42,7 +42,7 @@ public class SimpleArray<T> implements Iterable<T> {
     private void grow() {
         T[] tempArray;
         tempArray = data;
-        data = (T[]) new Object[size * 2] ;
+        data = (T[]) new Object[size * 2];
         System.arraycopy(tempArray, 0, data, 0, size);
     }
 

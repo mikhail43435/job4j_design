@@ -7,8 +7,6 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class EvenNumbersIteratorTest  {
-
-
     private EvenNumbersIterator it;
 
     @Before

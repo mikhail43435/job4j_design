@@ -13,24 +13,16 @@ public class Generics {
         first.add(new Animal());
         second.add(new Predator());
         third.add(new Tiger());
-
         gen.printObject(first);
         gen.printObject(second);
         gen.printObject(third);
         System.out.println();
-
-        //gen.printBoundedWildCard(first);
         gen.printBoundedWildCard(second);
         gen.printBoundedWildCard(third);
         System.out.println();
-
         gen.printLowerBoundedWildCard(first);
         gen.printLowerBoundedWildCard(second);
-        //gen.printLowerBoundedWildCard(third);
     }
-
-    //public void Generic
-
 
     public void printObject(List<?> list) {
         for (Iterator<?> it = list.iterator(); it.hasNext(); ) {

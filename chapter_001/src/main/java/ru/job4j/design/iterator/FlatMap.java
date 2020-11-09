@@ -12,7 +12,7 @@ public class FlatMap<T> implements Iterator<T> {
     public FlatMap(Iterator<Iterator<T>> data) {
         this.data = data;
         if (data != null) {
-            cursor = Collections.emptyIterator();//data.next();//
+            cursor = Collections.emptyIterator();
         }
     }
 

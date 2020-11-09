@@ -5,7 +5,6 @@ import static org.hamcrest.Matchers.is;
 import java.util.NoSuchElementException;
 import org.junit.Test;
 
-
 public class SimpleArrayItTest {
 
     @Test

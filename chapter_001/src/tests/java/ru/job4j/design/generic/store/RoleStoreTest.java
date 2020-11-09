@@ -14,7 +14,7 @@ public class RoleStoreTest {
         memStore.add(new Role("54"));
         memStore.add(new Role("24"));
         Role newRole = new Role("77");
-        assertThat(memStore.replace("24", newRole ), is(true));
+        assertThat(memStore.replace("24", newRole), is(true));
         assertThat(memStore.findById("77"), is(newRole));
         Assert.assertNull(memStore.findById("24"));
     }
@@ -26,7 +26,7 @@ public class RoleStoreTest {
         memStore.add(new Role("54"));
         memStore.add(new Role("24"));
         Role newRole = new Role("77");
-        assertThat(memStore.replace("333", newRole ), is(false));
+        assertThat(memStore.replace("333", newRole), is(false));
     }
 
     @Test

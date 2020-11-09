@@ -5,7 +5,7 @@ import static java.util.Objects.checkIndex;
 
 public class SimpleArray<T> {
     private final T[] data;
-    private int index ;
+    private int index;
     private final int size;
 
     public SimpleArray(int size) {
@@ -34,7 +34,7 @@ public class SimpleArray<T> {
 
     public void remove(int indexRemove) {
         checkIndex(indexRemove, index);
-        System.arraycopy(data, indexRemove + 1, data, indexRemove , index - indexRemove - 1);
+        System.arraycopy(data, indexRemove + 1, data, indexRemove, index - indexRemove - 1);
         index--;
     }
 
