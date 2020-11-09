@@ -7,10 +7,10 @@ import java.util.Objects;
 
 public class SimpleArray<T> implements Iterable<T> {
 
-    private T[] data;
-    private int size;
-    private int pointer;
-    private int modCount;
+    protected T[] data;
+    protected int size;
+    protected int pointer;
+    protected int modCount;
 
     public SimpleArray() {
         data = (T[]) new Object[10];
@@ -20,7 +20,7 @@ public class SimpleArray<T> implements Iterable<T> {
         data = (T[]) new Object[size];
     }
 
-    protected int getSize() {
+    public int getSize() {
         return size;
     }
 
@@ -39,7 +39,7 @@ public class SimpleArray<T> implements Iterable<T> {
         modCount++;
     }
 
-    private void grow() {
+    protected void grow() {
         T[] tempArray;
         tempArray = data;
         data = (T[]) new Object[size * 2];
