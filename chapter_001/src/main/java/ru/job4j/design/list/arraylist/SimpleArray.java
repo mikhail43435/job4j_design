@@ -34,14 +34,16 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void add(T model) {
-        if (size == data.length) {
-            T[] tempArray;
-            tempArray = data;
-            data = (T[]) new Object[size * 2] ;
-            System.arraycopy(tempArray, 0, data, 0, size);
-        }
+        if (size == data.length) grow();
         data[size++] = model;
         modCount++;
+    }
+
+    private void grow() {
+        T[] tempArray;
+        tempArray = data;
+        data = (T[]) new Object[size * 2] ;
+        System.arraycopy(tempArray, 0, data, 0, size);
     }
 
     @Override
