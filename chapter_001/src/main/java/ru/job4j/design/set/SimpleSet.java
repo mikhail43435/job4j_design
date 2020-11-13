@@ -25,11 +25,11 @@ public class SimpleSet<T> {
         return true;
     }
 
-    public T get(int index) {
+    /*public T get(int index) {
         return data.get(index);
-    }
 
-/*
+
+
     public int getSize() {
         return data.getSize();
     }
