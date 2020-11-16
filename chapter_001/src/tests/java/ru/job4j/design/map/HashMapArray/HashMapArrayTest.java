@@ -14,7 +14,14 @@ public class HashMapArrayTest {
         array.insert("one", "two");
         String rsl = array.get("one");
         assertThat(rsl, is("first value"));
-        assertThat(array.getSize(), is(1));
+        assertThat(array.getSize(), is(2));
+    }
+
+    @Test
+    public void whenAddAndExist() {
+        HashMapArray<String, String> array = new HashMapArray<>();
+        array.insert("one", "first value");
+        assertThat(array.insert("one", "first value"), is(false));
     }
 
     @Test
@@ -25,7 +32,7 @@ public class HashMapArrayTest {
         array.insert(2, 2);
         Integer rsl = array.get(1);
         assertThat(rsl, is(1));
-        assertThat(array.getSize(), is(2));
+        assertThat(array.getSize(), is(3));
     }
 
     @Test
@@ -57,5 +64,24 @@ public class HashMapArrayTest {
         array.insert("one", "first value");
         array.insert("two", "two");
         assertThat(array.delete("three"), is(false));
+    }
+
+    @Test
+    public void whenGrow() {
+        HashMapArray<Integer, Integer> array = new HashMapArray<>();
+        array.insert(1, 1);
+        array.insert(2, 2);
+        array.insert(3, 2);
+        array.insert(4, 2);
+        array.insert(5, 2);
+        array.insert(6, 2);
+        array.insert(7, 2);
+        array.insert(8, 2);
+        array.insert(9, 2);
+        array.insert(10, 2);
+        array.insert(11, 2);
+        array.insert(12, 12);
+        assertThat(array.get(12), is(12));
+        assertThat(array.getSize(), is(12));
     }
 }

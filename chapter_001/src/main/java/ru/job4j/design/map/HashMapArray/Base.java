@@ -21,7 +21,11 @@ public class Base<K, V> {
 
     @Override
     public boolean equals(Object o) {
-        return this.hashCode() == o.hashCode();
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Base<?, ?> base = (Base<?, ?>) o;
+        return Objects.equals(key, base.key) &&
+                Objects.equals(value, base.value);
     }
 
     @Override
