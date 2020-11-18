@@ -4,7 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
-
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 public class HashMapArrayTest {
@@ -22,15 +22,17 @@ public class HashMapArrayTest {
     public void whenAddThenHasIt() {
         HashMapArray<String, String> array = new HashMapArray<>();
         array.insert("one", "first value");
-        assertThat(array.next(), is("first value"));
-        assertThat(array.hasNext(), is(false));
+        Iterator it = array.iterator();
+        assertThat(it.next(), is("first value"));
+        assertThat(it.hasNext(), is(false));
 
     }
 
     @Test
     public void whenNullThenHasIt() {
         HashMapArray<String, String> array = new HashMapArray<>();
-        assertThat(array.hasNext(), is(false));
+        Iterator it = array.iterator();
+        assertThat(it.hasNext(), is(false));
     }
 
     @Test
@@ -48,7 +50,6 @@ public class HashMapArrayTest {
         array.insert(2, 2);
         Integer rsl = array.get(1);
         assertThat(rsl, is(1));
-        //assertThat(array.getSize(), is(2));
     }
 
     @Test
@@ -99,7 +100,14 @@ public class HashMapArrayTest {
         array.insert(12, 12);
         array.insert(13, 12);
         assertThat(array.get(12), is(12));
-        //assertThat(array.getSize(), is(13));
-        //assertThat(array.getLength(), is(32));
+    }
+
+    @Test(expected = ConcurrentModificationException.class)
+    public void whenCorruptedIt() {
+        HashMapArray<String, String> array = new HashMapArray<>();
+        array.insert("first", "fd");
+        Iterator it = array.iterator();
+        array.insert("second", "fd");
+        it.next();
     }
 }
