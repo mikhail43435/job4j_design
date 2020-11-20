@@ -1,13 +1,19 @@
 package ru.job4j.design.io;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class LogFilter {
+
+    public static void main(String[] args) {
+        List<String> log = filter("C:\\projects\\job4j_design\\log.txt");
+        log.forEach(System.out::println);
+        save(log, "C:\\projects\\job4j_design\\404.txt");
+    }
+
     public static List<String> filter(String file) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
@@ -21,9 +27,14 @@ public class LogFilter {
         return lines;
     }
 
-    public static void main(String[] args) {
-        List<String> log = filter("C:\\projects\\job4j_elementary\\log.txt");
-        log.forEach(System.out::println);
+    public static void save(List<String> log, String file) {
+            try (PrintWriter out = new PrintWriter(
+                    new BufferedOutputStream(new FileOutputStream(file)))) {
+                Consumer<String> cons = e -> out.write(e + System.getProperty("line.separator"));
+                log.forEach(cons);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     private static boolean isDigit(String s) throws NumberFormatException {
