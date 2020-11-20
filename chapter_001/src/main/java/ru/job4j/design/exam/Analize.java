@@ -13,7 +13,7 @@ public class Analize {
         for (User u : previous) {
             map.put(u.id, u.name);
         }
-/*        for (User u : current) {
+        for (User u : current) {
             if (map.containsKey(u.id)) {
                 if (!map.get(u.id).equals(u.name)) {
                     info.changed++;
@@ -21,13 +21,13 @@ public class Analize {
             } else {
                 info.added++;
             }
-        }*/
-        info.changed = (int) current.stream().
+        }
+        /*info.changed = (int) current.stream().
                 filter(e -> map.containsKey(e.id) && !map.get(e.id).equals(e.name)).
                 count();
         info.added = (int) current.stream().
                 filter(e -> !map.containsKey(e.id)).
-                count();
+                count();*/
         info.deleted = previous.size() - current.size() + info.added;
         return info;
     }
