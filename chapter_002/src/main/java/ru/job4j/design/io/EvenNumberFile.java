@@ -8,7 +8,7 @@ import java.util.function.ToIntFunction;
 public class EvenNumberFile {
     public static void main(String[] args) {
         StringBuilder text = new StringBuilder();
-        try (FileInputStream in = new FileInputStream("C:\\projects\\job4j_elementary\\even.txt")) {
+        try (FileInputStream in = new FileInputStream("even.txt")) {
             int read;
             while ((read = in.read()) != -1) {
                 text.append((char) read);
@@ -16,9 +16,7 @@ public class EvenNumberFile {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String string = new String(text);
-        string = string.replaceAll("\r\n"," ");
-        String[] array = string.split(" ");
+        String[] array = new String(text).replaceAll("\r\n"," ").split(" ");
         ToIntFunction<String> toIntFunction = Integer::parseInt;
         Function<Integer, String> func =
                 e -> (e % 2) != 0 ? "The digit " + e + " is odd" : "The digit " + e + " is even";
