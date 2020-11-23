@@ -9,9 +9,9 @@ import java.util.function.Predicate;
 public class LogFilter {
 
     public static void main(String[] args) {
-        List<String> log = filter("C:\\projects\\job4j_design\\log.txt");
+        List<String> log = filter("log.txt");
         log.forEach(System.out::println);
-        save(log, "C:\\projects\\job4j_design\\404.txt");
+        save(log, "404.txt");
     }
 
     public static List<String> filter(String file) {
