@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class Analize {
 
@@ -13,7 +15,7 @@ public class Analize {
         for (User u : previous) {
             map.put(u.id, u.name);
         }
-        for (User u : current) {
+/*        for (User u : current) {
             if (map.containsKey(u.id)) {
                 if (!map.get(u.id).equals(u.name)) {
                     info.changed++;
@@ -22,12 +24,24 @@ public class Analize {
                 info.added++;
             }
         }
-        /*info.changed = (int) current.stream().
-                filter(e -> map.containsKey(e.id) && !map.get(e.id).equals(e.name)).
-                count();
-        info.added = (int) current.stream().
-                filter(e -> !map.containsKey(e.id)).
-                count();*/
+        Consumer<User> cons = e -> {
+            if (map.containsKey(e.id)) {
+                if (!map.get(e.id).equals(e.name)) {
+                    info.changed++;
+                }
+            } else {
+                info.added++;
+            }
+        };*/
+        current.forEach(e -> {
+            if (map.containsKey(e.id)) {
+                if (!map.get(e.id).equals(e.name)) {
+                    info.changed++;
+                }
+            } else {
+                info.added++;
+            }
+        });
         info.deleted = previous.size() - current.size() + info.added;
         return info;
     }
