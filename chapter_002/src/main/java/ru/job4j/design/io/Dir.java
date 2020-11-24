@@ -18,7 +18,7 @@ public class Dir {
         for (File subfile : file.listFiles()) {
             if (!subfile.isDirectory()) {
                 System.out.println("file name: " + subfile.getName()
-                        + "   file size: " + subfile.getTotalSpace());
+                        + "   file size: " + subfile.length());
             }
         }
     }
