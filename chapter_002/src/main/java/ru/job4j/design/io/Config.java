@@ -3,19 +3,18 @@ package ru.job4j.design.io;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.lang.IllegalArgumentException;
 
-public class Config {
+public class Config  {
     private final String path;
     private final Map<String, String> values = new HashMap<>();
 
     public Config(final String path) {
         this.path = path;
     }
-
-    public void load() throws IllegalArgumentException {
+    
+    public void load() {
         Function<String, String[]> splitter = (string -> {
             String[] array = string.split("=");
             if (array.length != 2) {
@@ -28,6 +27,8 @@ public class Config {
             in.lines().
                     filter(e -> (!e.isEmpty() && !e.startsWith("#") && e.contains("="))).
                     forEach(e -> values.put(splitter.apply(e)[0], splitter.apply(e)[1]));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException();
         } catch (Exception e) {
             e.printStackTrace();
         }
