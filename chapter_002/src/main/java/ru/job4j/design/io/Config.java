@@ -13,7 +13,7 @@ public class Config  {
     public Config(final String path) {
         this.path = path;
     }
-    
+
     public void load() {
         Function<String, String[]> splitter = (string -> {
             String[] array = string.split("=");

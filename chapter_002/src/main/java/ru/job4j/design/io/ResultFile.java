@@ -1,4 +1,4 @@
-package ru.job4j.design.io.multtable;
+package ru.job4j.design.io;
 
 import java.io.FileOutputStream;
 import java.util.stream.Stream;

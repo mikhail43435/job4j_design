@@ -11,6 +11,7 @@ import static java.nio.file.FileVisitResult.CONTINUE;
 
 public class Search {
     public static void main(String[] args) throws IOException {
+        //search(Paths.get("."), "java").forEach(System.out::println);
         search(Paths.get("."), "java").forEach(System.out::println);
     }
 
