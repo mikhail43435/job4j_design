@@ -16,7 +16,7 @@ public class EvenNumberFile {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String[] array = new String(text).replaceAll(System.lineSeparator()," ").split(" ");
+        String[] array = new String(text).split(System.lineSeparator());
         ToIntFunction<String> toIntFunction = Integer::parseInt;
         Function<Integer, String> func =
                 e -> (e % 2) != 0 ? "The digit " + e + " is odd" : "The digit " + e + " is even";
