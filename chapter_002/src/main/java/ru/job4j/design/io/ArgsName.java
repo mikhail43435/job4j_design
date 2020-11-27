@@ -26,7 +26,7 @@ public class ArgsName {
                 throw new IllegalArgumentException("Invalid key. Key should starts with"
                         + " dash symbol and has at least one letter after");
             }
-            values.put(pair[0].substring(1), pair[1]);
+            values.put(pair[0].substring(1).trim(), pair[1].trim());
         }
     }
 

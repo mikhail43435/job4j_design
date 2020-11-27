@@ -17,6 +17,7 @@ public class SearchDub {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             startFolder = fc.getSelectedFile();
         }
+        //if (startFolder == null) return;
         List<Path> pathList;
         Set<Path> dubPathSet = new HashSet<>();
         HashMap<FileData, Path> hashTable = new HashMap<>();
@@ -51,6 +52,7 @@ public class SearchDub {
             System.out.println("path:   " + currPath.toFile().getPath());
             lastPath = currPath;
         }
+        System.out.println(dubPathSet.size());
     }
 
     public static List<Path> search(Path root, String ext) throws IOException {

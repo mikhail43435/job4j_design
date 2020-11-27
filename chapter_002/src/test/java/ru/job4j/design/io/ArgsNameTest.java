@@ -20,6 +20,13 @@ public class ArgsNameTest {
         assertThat(jvm.get("Xmx"), is("512"));
     }
 
+    @Test
+    public void whenGetAndNeededTrim() {
+        ArgsName jvm = ArgsName.of(new String[] {"-encoding = UTF-8 ", "- Xmx =  512"});
+        assertThat(jvm.get("encoding"), is("UTF-8"));
+        assertThat(jvm.get("Xmx"), is("512"));
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void whenGetNotExist() {
         ArgsName jvm = ArgsName.of(new String[] {});
