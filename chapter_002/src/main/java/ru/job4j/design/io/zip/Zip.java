@@ -4,8 +4,8 @@ import ru.job4j.design.io.SearchFiles;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -53,16 +53,11 @@ public class Zip {
         }
         SearchFiles searcher = new SearchFiles(path ->
                 !path.toFile().getName().endsWith(param.exclude()));
-        Path root = Path.of(".");
-        //Path root = Path.of(param.directory());
-        //Path root = Paths.get(param.directory());
-
-        System.out.println(root.getClass());
-        System.out.println(root);
-
-        //Path output = Path.of(param.output());
+        Path root = Path.of(param.directory());
+        if (!root.toFile().exists()) {
+            throw new NoSuchFileException("Указанной в ключе -d папки не существует!");
+        }
         Files.walkFileTree(root, searcher);
-        //List<Path> list = searcher.getPaths();
         new Zip().packFiles(searcher.getPaths(), Path.of(param.output()));
     }
 }
