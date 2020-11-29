@@ -1,27 +1,32 @@
 package ru.job4j.design.io;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
+
+import static java.util.Objects.isNull;
+import static ru.job4j.design.io.DirChooseDialog.chooseDir;
 
 public class SearchDub {
     public static void main(String[] args) throws IOException {
-        File startFolder = null;
-        JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new java.io.File(".")); //
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int returnVal = fc.showSaveDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            startFolder = fc.getSelectedFile();
+        File startFolder = chooseDir();
+        if (isNull(startFolder)) {
+            System.out.println("Каталог не выбран");
+            return;
         }
-        //if (startFolder == null) return;
-        List<Path> pathList;
+        Instant start = Instant.now();
+        System.out.println("Поиск дубликатов в папке: " + startFolder.toString());
+        //=====================================
+        /*List<Path> pathList;
         Set<Path> dubPathSet = new HashSet<>();
-        HashMap<FileData, Path> hashTable = new HashMap<>();
-        pathList = search(startFolder.toPath(), "");
+        HashMap<FileData, Path> hashTable = new HashMap<>();*/
+        ArrayList<Path> dubPathList = search(startFolder.toPath(), "");
+        //System.out.println(dubPathList);
+/*
         for (Path path : pathList) {
             FileData file = new FileData(path.toFile().getName(), path.toFile().length());
             if (hashTable.containsKey(file)) {
@@ -31,15 +36,17 @@ public class SearchDub {
                 hashTable.put(file, path);
             }
         }
-        List<Path> dubPathList = new ArrayList<>(dubPathSet);
-        Comparator<Path> cmp = (o1, o2) -> o1.toFile().getName().compareTo(o2.toFile().getName());
+*/
+        //List<Path> dubPathList = new ArrayList<>(dubPathSet);
+        //=====================================
+        Comparator<Path> cmp = Comparator.comparing(o -> o.toFile().getName());
         dubPathList.sort(cmp);
         Iterator<Path> it = dubPathList.iterator();
         Path currPath;
         Path lastPath = null;
         while (it.hasNext()) {
             currPath = it.next();
-            if (lastPath == null
+            if (isNull(lastPath)
                     || (!currPath.toFile().getName().equals(lastPath.toFile().getName())
                     && currPath.toFile().length() != lastPath.toFile().length())) {
                 System.out.println();
@@ -52,44 +59,16 @@ public class SearchDub {
             System.out.println("path:   " + currPath.toFile().getPath());
             lastPath = currPath;
         }
-        System.out.println(dubPathSet.size());
+        System.out.println(dubPathList.size());
+        Instant finish = Instant.now();
+        System.out.println("На выполнение поиска было потрачено "
+                + (Duration.between(start, finish).toSeconds())
+                + " секунд");
     }
 
-    public static List<Path> search(Path root, String ext) throws IOException {
-        SearchFiles seacher = new SearchFiles(path -> path.toFile().getName().endsWith(ext));
-        Files.walkFileTree(root, seacher);
-        return seacher.getPaths();
-    }
-
-    private static class FileData {
-        String name;
-        long size;
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            FileData fileData = (FileData) o;
-            return size == fileData.size &&
-                    Objects.equals(name, fileData.name);
-        }
-
-        @Override
-        public String toString() {
-            return "FileData{" +
-                    "name='" + name + '\'' +
-                    ", size=" + size +
-                    '}';
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(name, size);
-        }
-
-        public FileData(String name, long size) {
-            this.name = name;
-            this.size = size;
-        }
+    public static ArrayList<Path> search(Path root, String ext) throws IOException {
+        SearchFilesDub searcher = new SearchFilesDub(path -> path.toFile().getName().endsWith(ext));
+        Files.walkFileTree(root, searcher);
+        return searcher.getPaths();
     }
 }
