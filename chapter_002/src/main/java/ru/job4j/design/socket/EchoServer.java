@@ -32,12 +32,14 @@ public class EchoServer {
                         System.out.println("Строка сообщения: " + str);
                         if (isMessage(str) && str.contains(OUT)) {
                             isRunning = false;
+                            answer = "Bye";
                         }
                         if (isMessage(str) && str.contains(GREETING)) {
                             answer = "Hello";
                         }
                     }
                     out.write(("HTTP/1.1 200 OK\r\n").getBytes());
+                    out.write(("\r\n").getBytes());
                     out.write((answer + "\n").getBytes());
                     out.flush();
                 } catch (Exception e) {
