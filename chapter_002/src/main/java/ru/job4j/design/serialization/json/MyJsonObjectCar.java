@@ -12,6 +12,26 @@ public class MyJsonObjectCar {
     //@SerializedName("mill")
     private final Integer[] millageAtTheEndOfAYear;
 
+    public String getModel() {
+        return model;
+    }
+
+    public Integer getPower() {
+        return power;
+    }
+
+    public boolean isValid() {
+        return isValid;
+    }
+
+    public MyJsonObjectCarOwner getOwner() {
+        return owner;
+    }
+
+    public Integer[] getMillageAtTheEndOfAYear() {
+        return millageAtTheEndOfAYear;
+    }
+
     public MyJsonObjectCar(String model, Integer power,
                            boolean isValid, MyJsonObjectCarOwner owner,
                            Integer[] millageAtTheEndOfAYear) {
