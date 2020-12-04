@@ -26,7 +26,7 @@ public class AnalizeTest {
     }
 
     @Test
-    public void when1UserDeleted1Changed1Addded() {
+    public void when1UserDeleted1Changed1Added() {
         List<Analize.User> listPrev = new ArrayList<>();
         listPrev.add(new User(1, "Bill"));
         listPrev.add(new User(2, "John"));
