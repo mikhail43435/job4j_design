@@ -1,0 +1,28 @@
+INSERT INTO subscriber(fullname) values ('AM');
+INSERT INTO subscriber(fullname) values ('WE');
+INSERT INTO subscriber(fullname) values ('VD');
+INSERT INTO subscriber(fullname) values ('EM');
+INSERT INTO subscriber(fullname) values ('CR');
+INSERT INTO subscriber(fullname) values ('WE');
+INSERT INTO subscriber(fullname) values ('GR');
+INSERT INTO subscriber(fullname) values ('EF');
+INSERT INTO subscriber(fullname) values ('DD');
+INSERT INTO subscriber(fullname) values ('SF');
+
+INSERT INTO phone_number("number", subscriber_id) values ('54652344', 1);
+INSERT INTO phone_number("number", subscriber_id) values ('54634654', 1);
+INSERT INTO phone_number("number", subscriber_id) values ('54696754', 2);
+INSERT INTO phone_number("number", subscriber_id) values ('546784654', 3);
+INSERT INTO phone_number("number", subscriber_id) values ('54435654', 4);
+INSERT INTO phone_number("number", subscriber_id) values ('54654654', 1);
+INSERT INTO phone_number("number", subscriber_id) values ('546553654', 1);
+INSERT INTO phone_number("number", subscriber_id) values ('5465465464', 1);
+INSERT INTO phone_number("number", subscriber_id) values ('54234654', 5);
+INSERT INTO phone_number("number", subscriber_id) values ('546545', 1);
+INSERT INTO phone_number("number", subscriber_id) values ('546546546574', 1);
+INSERT INTO phone_number("number", subscriber_id) values ('54654654', 6);
+INSERT INTO phone_number("number", subscriber_id) values ('5468764', 7);
+INSERT INTO phone_number("number", subscriber_id) values ('54654654', 1);
+INSERT INTO phone_number("number", subscriber_id) values ('5434554', 3);
+INSERT INTO phone_number("number", subscriber_id) values ('546435354', 1);
+INSERT INTO phone_number("number", subscriber_id) values ('546854', 7);
