@@ -8,11 +8,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class ConnectionDemo {
+public class ConnectionDemoProp {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
         Properties prop = new Properties();
-        try (InputStream inputStream = ConnectionDemo.class
+        try (InputStream inputStream = ConnectionDemoProp.class
                 .getClassLoader().getResourceAsStream("app.properties")) {
             prop.load(inputStream);
         } catch (IOException e) {
