@@ -1,0 +1,37 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<!-- Придумайте Java объект,
+объект должен иметь поля булево,
+какой-нибудь числовой тип,
+строковый тип, вложенный объект и массив. -->
+
+<carforsale>
+    <model>Tesla</model>
+    <prod_year>2019</prod_year>
+    <millage>49845</millage>
+    <!-- булево -->
+    <used>true</used>
+    <!-- вложенный объект (коллекция) -->
+    <owners>
+        <owner_001>
+            <owner>
+                <name>Greg T</name>
+                <phone>+1324324</phone>
+                <adress>12443 Ocean Beach</adress>
+            </owner>
+        </owner_001>
+        <owner_002>
+            <name>Donald D</name>
+            <phone>+5464654</phone>
+            <adress>49849 Black Lake</adress>
+        </owner_002>
+        <owner_003 name="Trevor" phone="4654654" adress="n/a"/>
+    </owners>
+    <!-- массив -->
+    <price_history>
+        <price01 value="1568"/>
+        <price02 value="1556"/>
+        <price03 value="1654"/>
+        <price04 value="1884"/>
+        <price05 value="1954"/>
+    </price_history>
+</carforsale>
