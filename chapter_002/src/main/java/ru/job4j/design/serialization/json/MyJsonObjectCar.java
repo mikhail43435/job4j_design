@@ -2,15 +2,25 @@ package ru.job4j.design.serialization.json;
 
 import com.google.gson.annotations.SerializedName;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Arrays;
 
+@XmlRootElement(name = "car")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MyJsonObjectCar {
-    private final String model;
-    private final Integer power;
-    private final boolean isValid;
-    private final MyJsonObjectCarOwner owner;
+    @XmlAttribute
+    private String model;
+    private Integer power;
+    private boolean isValid;
+    private MyJsonObjectCarOwner owner;
     //@SerializedName("mill")
-    private final Integer[] millageAtTheEndOfAYear;
+    private Integer[] millageAtTheEndOfAYear;
+
+    public MyJsonObjectCar() {
+    }
 
     public String getModel() {
         return model;
