@@ -18,10 +18,8 @@
      </last_owner>
     <!-- массив -->
     <price_history>
-        <price01 value="1568"/>
-        <price02 value="1556"/>
-        <price03 value="1654"/>
-        <price04 value="1884"/>
-        <price05 value="1954"/>
+        <value>35465</value>
+        <value>36498</value>
+        <value>34898</value>
     </price_history>
 </carforsale>
