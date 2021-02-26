@@ -26,4 +26,8 @@ INSERT INTO teens(name, gender) VALUES('R', 'm');
 INSERT INTO teens(name, gender) VALUES('E', 'm');
 INSERT INTO teens(name, gender) VALUES('H', 'bs');
 INSERT INTO teens(name, gender) VALUES('R', 'bs');
-SELECT t.name, n.name, (t.gender||'-'||n.gender) AS "g-g" FROM teens t CROSS JOIN teens n WHERE t.gender<>n.gender;
+
+SELECT t.name, n.name, (t.gender||'-'||n.gender) AS "g-g" 
+FROM teens t 
+CROSS JOIN teens n 
+WHERE t.gender<>n.gender;
