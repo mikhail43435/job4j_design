@@ -24,7 +24,6 @@ public class GeneratorBasicTest {
     public void testThenKeyNotFound() {
         GeneratorBasic generator = new GeneratorBasic();
         String stringIn = "I am ${name}, I am ${subject} years old";
-        String stringOut = "I am Petr, I am 31 years old";
         Map<String, String> map = new HashMap<>();
         map.put("name", "Petr");
         generator.produce(stringIn, map);
@@ -34,7 +33,6 @@ public class GeneratorBasicTest {
     public void testThenKeyNotExist() {
         GeneratorBasic generator = new GeneratorBasic();
         String stringIn = "I am ${name}";
-        String stringOut = "I am Petr";
         Map<String, String> map = new HashMap<>();
         map.put("name", "Petr");
         map.put("age", "31");
