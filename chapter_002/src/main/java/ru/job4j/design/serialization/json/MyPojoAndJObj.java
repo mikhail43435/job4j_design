@@ -1,13 +1,6 @@
 package ru.job4j.design.serialization.json;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-import ru.job4j.design.serialization.json.educase.Contact;
-import ru.job4j.design.serialization.json.educase.Person;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MyPojoAndJObj {
 
