@@ -7,7 +7,7 @@ import ru.job4j.design.srp.reports.model.TextGenerator;
 import java.util.List;
 
 /**
- * Стандартный шаблон
+ * Стандартный шаблон генератора отчетов
  */
 
 public class TextGeneratorStandard implements TextGenerator {

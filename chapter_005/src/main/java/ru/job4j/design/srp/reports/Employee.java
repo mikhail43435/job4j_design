@@ -1,15 +1,20 @@
 package ru.job4j.design.srp.reports;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Calendar;
 import java.util.Objects;
 
 import static java.util.Objects.isNull;
 
+@XmlRootElement
 public class Employee {
     private String name;
     private Calendar hired;
     private Calendar fired;
     private double salary;
+
+    public Employee() {
+    }
 
     public Employee(String name, Calendar hired, Calendar fired, double salary) {
         this.name = name;

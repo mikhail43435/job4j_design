@@ -6,4 +6,6 @@ import java.util.function.Predicate;
 
 public interface Report {
     String generate(Predicate<Employee> filter, TextGenerator textGenerator);
+
+    String format(String text, TextFormatter textFormatter);
 }

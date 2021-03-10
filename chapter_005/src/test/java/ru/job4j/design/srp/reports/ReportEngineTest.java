@@ -2,10 +2,15 @@ package ru.job4j.design.srp.reports;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.Before;
 import ru.job4j.design.srp.reports.model.Report;
+import ru.job4j.design.srp.reports.textformatters.ToHTML;
+import ru.job4j.design.srp.reports.textformatters.ToJSON;
+import ru.job4j.design.srp.reports.textformatters.ToXML;
 import ru.job4j.design.srp.reports.textgenerators.TextGeneratorBUH001;
 import ru.job4j.design.srp.reports.textgenerators.TextGeneratorHR001;
 import ru.job4j.design.srp.reports.textgenerators.TextGeneratorIT001;
@@ -89,5 +94,81 @@ public class ReportEngineTest {
                 "2. Petr;731,04;" + System.lineSeparator() +
                 "3. Alf;651,32;" + System.lineSeparator();
         assertThat(engine.generate(em -> true, new TextGeneratorBUH001()), is(expect));
+    }
+
+    @Test
+    public void whenBUH001andJSON() {
+        MemStore store = new MemStore();
+        store.add(new Employee("1. Ivan", calendarHired1, calendarFired1, 10045));
+        store.add(new Employee("2. Petr", calendarHired2, calendarFired2, 54498));
+        store.add(new Employee("3. Alf", calendarHired3, calendarFired3, 48555));
+        Report engine = new ReportEngine(store);
+        String expected = "{\"Employee 3\":{\"Salary USD\":\"651,32\",\"Name\":\"" +
+                "3. Alf\"},\"Employee 2\":" +
+                "{\"Salary USD\":\"731,04\",\"Name\":\"2. Petr\"},\"Report type\":" +
+                "\"Employee report\",\"Employee 1\":" +
+                "{\"Salary USD\":\"134,74\",\"Name\":\"1. Ivan\"}}";
+        String result = engine.generate(em -> true, new TextGeneratorBUH001());
+        result = engine.format(result, new ToJSON());
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void whenStandardAndXML() {
+        MemStore store = new MemStore();
+        store.add(new Employee("1. Ivan", calendarHired1, calendarFired1, 10045));
+        store.add(new Employee("2. Petr", calendarHired2, calendarFired2, 54498));
+        store.add(new Employee("3. Alf", calendarHired3, calendarFired3, 48555));
+        Report engine = new ReportEngine(store);
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\\r\n" +
+                "<report>\\r\n" +
+                "    <report_type>Employee report</report_type>\\r\n" +
+                "    <report_body>\\r\n" +
+                "        <employee_0>\\r\n" +
+                "            <Name>1. Ivan</Name>\\r\n" +
+                "            <Hired>03/03/2009</Hired>\\r\n" +
+                "            <Fired>10/12/2010</Fired>\\r\n" +
+                "            <Salary>10045.0</Salary>\\r\n" +
+                "        </employee_0>\\r\n" +
+                "        <employee_1>\\r\n" +
+                "            <Name>3. Alf</Name>\\r\n" +
+                "            <Hired>23/01/2004</Hired>\\r\n" +
+                "            <Fired></Fired>\\r\n" +
+                "            <Salary>48555.0</Salary>\\r\n" +
+                "        </employee_1>\\r\n" +
+                "        <employee_2>\\r\n" +
+                "            <Name>2. Petr</Name>\\r\n" +
+                "            <Hired>14/02/2019</Hired>\\r\n" +
+                "            <Fired></Fired>\\r\n" +
+                "            <Salary>54498.0</Salary>\\r\n" +
+                "        </employee_2>\\r\n" +
+                "    </report_body>\\r\n" +
+                "</report>";
+        String result = engine.generate(em -> true, new TextGeneratorStandard());
+        result = engine.format(result, new ToXML());
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void whenStandardAndHTML() {
+        MemStore store = new MemStore();
+        store.add(new Employee("1. Ivan", calendarHired1, calendarFired1, 10045));
+        store.add(new Employee("2. Petr", calendarHired2, calendarFired2, 54498));
+        store.add(new Employee("3. Alf", calendarHired3, calendarFired3, 48555));
+        Report engine = new ReportEngine(store);
+        String expected = "<!DOCTYPE html>\\r\n" +
+                "<html lang=\"ru\">\\r\n" +
+                "<head>\\r\n" +
+                "Name; Hired; Fired; Salary;\\r\n" +
+                "</head>\\r\n" +
+                "<body>\\r\n" +
+                "<P>1. Ivan;03/03/2009;10/12/2010;10045.0;</P>\\r\n" +
+                "<P>3. Alf;23/01/2004;<>;48555.0;</P>\\r\n" +
+                "<P>2. Petr;14/02/2019;<>;54498.0;</P>\\r\n" +
+                "</body>\\r\n" +
+                "</html>";
+        String result = engine.generate(em -> true, new TextGeneratorStandard());
+        result = engine.format(result, new ToHTML());
+        assertThat(result, is(expected));
     }
 }
