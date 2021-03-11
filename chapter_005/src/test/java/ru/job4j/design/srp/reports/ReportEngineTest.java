@@ -2,7 +2,6 @@ package ru.job4j.design.srp.reports;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -120,33 +119,33 @@ public class ReportEngineTest {
         store.add(new Employee("2. Petr", calendarHired2, calendarFired2, 54498));
         store.add(new Employee("3. Alf", calendarHired3, calendarFired3, 48555));
         Report engine = new ReportEngine(store);
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\\r\n" +
-                "<report>\\r\n" +
-                "    <report_type>Employee report</report_type>\\r\n" +
-                "    <report_body>\\r\n" +
-                "        <employee_0>\\r\n" +
-                "            <Name>1. Ivan</Name>\\r\n" +
-                "            <Hired>03/03/2009</Hired>\\r\n" +
-                "            <Fired>10/12/2010</Fired>\\r\n" +
-                "            <Salary>10045.0</Salary>\\r\n" +
-                "        </employee_0>\\r\n" +
-                "        <employee_1>\\r\n" +
-                "            <Name>3. Alf</Name>\\r\n" +
-                "            <Hired>23/01/2004</Hired>\\r\n" +
-                "            <Fired></Fired>\\r\n" +
-                "            <Salary>48555.0</Salary>\\r\n" +
-                "        </employee_1>\\r\n" +
-                "        <employee_2>\\r\n" +
-                "            <Name>2. Petr</Name>\\r\n" +
-                "            <Hired>14/02/2019</Hired>\\r\n" +
-                "            <Fired></Fired>\\r\n" +
-                "            <Salary>54498.0</Salary>\\r\n" +
-                "        </employee_2>\\r\n" +
-                "    </report_body>\\r\n" +
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + System.lineSeparator() +
+                "<report>" + System.lineSeparator() +
+                "    <report_type>Employee report</report_type>" + System.lineSeparator() +
+                "    <report_body>" + System.lineSeparator() +
+                "        <employee_0>" + System.lineSeparator() +
+                "            <Name>1. Ivan</Name>" + System.lineSeparator() +
+                "            <Hired>03/03/2009</Hired>" + System.lineSeparator() +
+                "            <Fired>10/12/2010</Fired>" + System.lineSeparator() +
+                "            <Salary>10045.0</Salary>" + System.lineSeparator() +
+                "        </employee_0>" + System.lineSeparator() +
+                "        <employee_1>" + System.lineSeparator() +
+                "            <Name>3. Alf</Name>" + System.lineSeparator() +
+                "            <Hired>23/01/2004</Hired>" + System.lineSeparator() +
+                "            <Fired></Fired>" + System.lineSeparator() +
+                "            <Salary>48555.0</Salary>" + System.lineSeparator() +
+                "        </employee_1>" + System.lineSeparator() +
+                "        <employee_2>" + System.lineSeparator() +
+                "            <Name>2. Petr</Name>" + System.lineSeparator() +
+                "            <Hired>14/02/2019</Hired>" + System.lineSeparator() +
+                "            <Fired></Fired>" + System.lineSeparator() +
+                "            <Salary>54498.0</Salary>" + System.lineSeparator() +
+                "        </employee_2>" + System.lineSeparator() +
+                "    </report_body>" + System.lineSeparator() +
                 "</report>";
         String result = engine.generate(em -> true, new TextGeneratorStandard());
         result = engine.format(result, new ToXML());
-        assertThat(result, is(expected));
+        assertEquals(result, expected);
     }
 
     @Test
@@ -156,19 +155,19 @@ public class ReportEngineTest {
         store.add(new Employee("2. Petr", calendarHired2, calendarFired2, 54498));
         store.add(new Employee("3. Alf", calendarHired3, calendarFired3, 48555));
         Report engine = new ReportEngine(store);
-        String expected = "<!DOCTYPE html>\\r\n" +
-                "<html lang=\"ru\">\\r\n" +
-                "<head>\\r\n" +
-                "Name; Hired; Fired; Salary;\\r\n" +
-                "</head>\\r\n" +
-                "<body>\\r\n" +
-                "<P>1. Ivan;03/03/2009;10/12/2010;10045.0;</P>\\r\n" +
-                "<P>3. Alf;23/01/2004;<>;48555.0;</P>\\r\n" +
-                "<P>2. Petr;14/02/2019;<>;54498.0;</P>\\r\n" +
-                "</body>\\r\n" +
+        String expected = "<!DOCTYPE html>" + System.lineSeparator() +
+                "<html lang=\"ru\">" + System.lineSeparator() +
+                "<head>" + System.lineSeparator() +
+                "Name; Hired; Fired; Salary;" + System.lineSeparator() +
+                "</head>" + System.lineSeparator() +
+                "<body>" + System.lineSeparator() +
+                "<P>1. Ivan;03/03/2009;10/12/2010;10045.0;</P>" + System.lineSeparator() +
+                "<P>3. Alf;23/01/2004;<>;48555.0;</P>" + System.lineSeparator() +
+                "<P>2. Petr;14/02/2019;<>;54498.0;</P>" + System.lineSeparator() +
+                "</body>" + System.lineSeparator() +
                 "</html>";
         String result = engine.generate(em -> true, new TextGeneratorStandard());
         result = engine.format(result, new ToHTML());
-        assertThat(result, is(expected));
+        assertEquals(result, expected);
     }
 }
