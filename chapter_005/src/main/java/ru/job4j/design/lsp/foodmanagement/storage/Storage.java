@@ -7,22 +7,27 @@ import java.util.List;
 
 public abstract class Storage {
 
-    List<Food> items = new ArrayList<>();
+    protected String name;
 
-    public void addItem(Food food) {
+    private final List<Food> items = new ArrayList<>();
+
+    public abstract boolean accept(Food food);
+
+    public void add(Food food) {
         items.add(food);
-    }
-
-    public void addItemWithDiscount(Food food, int discount) {
-        food.setDiscount(discount);
-        items.add(food);
-    }
-
-    public void display() {
-        System.out.println(items);
     }
 
     public List<Food> getItemsList() {
         return items;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void display() {
+        System.out.println("======================");
+        System.out.println(this.getName());
+        items.forEach(System.out::println);
     }
 }
