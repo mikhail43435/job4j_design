@@ -1,26 +1,28 @@
-package ru.job4j.design.parking;
+package ru.job4j.design.parking.parking;
+
+import ru.job4j.design.parking.vehicle.Vehicle;
 
 public abstract class Parking {
 
-    protected int totalSpacesForCars;
-    protected int totalSpacesForTrucks;
-    protected int occupiedSpacesCars;
-    protected int occupiedSpacesTrucks;
-    protected Vehicle[] arrayOfVehiclesCars;
-    protected Vehicle[] arrayOfVehiclesTrucks;
+    private final int totalSpacesForCars;
+    private final int totalSpacesForTrucks;
+    private int occupiedSpacesCars;
+    private int occupiedSpacesTrucks;
+    private Vehicle[] arrayOfCarPlaces;
+    private Vehicle[] arrayOfVehiclesTrucks;
 
     public Parking(int numOfSpacesCars, int numOfSpacesTrucks) {
         this.totalSpacesForCars = numOfSpacesCars;
         this.totalSpacesForTrucks = numOfSpacesTrucks;
-        arrayOfVehiclesCars = new Vehicle[numOfSpacesCars];
-        arrayOfVehiclesCars = new Vehicle[numOfSpacesTrucks];
+        arrayOfCarPlaces = new Vehicle[numOfSpacesCars];
+        arrayOfCarPlaces = new Vehicle[numOfSpacesTrucks];
     }
 
-    public boolean parkCar(Vehicle vehicle) {
+    public boolean parkCarToCarSide(Vehicle vehicle) {
         return false;
     }
 
-    public boolean parkTruck(Vehicle vehicle) {
+    public boolean parkCarToTruckSide(Vehicle vehicle) {
         return false;
     }
 
@@ -44,11 +46,26 @@ public abstract class Parking {
         return occupiedSpacesTrucks;
     }
 
+    public Vehicle[] getArrayOfCarPlaces() {
+        return null;
+    }
+
+    public Vehicle[] getArrayOfTruckPlaces() {
+        return null;
+    }
+
+    public boolean isCarSideIsFull() {
+        return false;
+    }
+
+    public boolean isTruckSideIsFull() {
+        return false;
+    }
+
     public void display() {
     }
 
     public boolean isVehicleParked(Vehicle vehicle) {
         return false;
     }
-
 }
