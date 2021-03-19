@@ -1,8 +1,7 @@
 package ru.job4j.design.lsp.foodmanagement.storage;
 
 import ru.job4j.design.lsp.foodmanagement.food.Food;
-
-import static ru.job4j.design.lsp.foodmanagement.util.FoodSorter.getFoodCategory;
+import ru.job4j.design.lsp.foodmanagement.util.ShelfLifeCalc;
 
 public class Trash extends Storage implements CanStore {
 
@@ -12,6 +11,6 @@ public class Trash extends Storage implements CanStore {
 
     @Override
     public boolean accept(Food food) {
-        return getFoodCategory(food) == 4;
+        return ShelfLifeCalc.getPercentageOfShelfLifeLeft(food) > 1000;
     }
 }

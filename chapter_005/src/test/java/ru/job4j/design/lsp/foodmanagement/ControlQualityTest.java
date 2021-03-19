@@ -96,21 +96,4 @@ public class ControlQualityTest {
         assertThat(shop.getItemsList().size(), is(0));
         assertThat(trash.getItemsList(), is(items));
     }
-
-    @Test
-    public void testThenInvalidDates() {
-        Storage shop = new Shop();
-        Storage warehouse = new Warehouse();
-        Storage trash = new Trash();
-
-        ControlQuality cq = new ControlQuality();
-        cq.addStore(shop, warehouse, trash);
-        Food food =
-                new Apple("Red apple",
-                        LocalDate.now().plusDays(50),
-                        LocalDate.now().plusDays(150),
-                        100,
-                        0);
-        assertThat(cq.processFood(food), is(false));
-    }
 }

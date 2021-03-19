@@ -1,5 +1,7 @@
 package ru.job4j.design.lsp.foodmanagement.food;
 
+import ru.job4j.design.lsp.foodmanagement.util.disc.Discounter;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -54,8 +56,8 @@ public abstract class Food {
         return discount;
     }
 
-    public void setDiscount(int discount) {
-        this.discount = discount;
+    public void setDiscount(Discounter discounter) {
+        this.discount = discounter.getDiscount(this);
     }
 
     @Override
