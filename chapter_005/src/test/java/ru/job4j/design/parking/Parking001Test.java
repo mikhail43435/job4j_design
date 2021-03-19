@@ -13,35 +13,27 @@ import ru.job4j.design.parking.vehicle.Vehicle;
 public class Parking001Test {
 
     @Test
-    public void testThenParkPassCarAndLeave() {
+    public void testThenParkCarAndLeave() {
         Vehicle vehicle = new Car();
         Parking parking = new Parking001(10, 10);
         parking.parkCarToCarSide(vehicle);
-
         assertThat(parking.getArrayOfCarPlaces()[0], is(vehicle));
-        assertThat(parking.getArrayOfTruckPlaces().length, is(0));
-
+        assertThat(parking.getNumOfFreeSpacesForTrucks(), is(10));
         parking.leaveParking(vehicle);
-
-        assertThat(parking.getArrayOfCarPlaces().length, is(0));
-        assertThat(parking.getArrayOfTruckPlaces().length, is(0));
+        assertThat(parking.getNumOfFreeSpacesForCars(), is(10));
+        assertThat(parking.getNumOfFreeSpacesForTrucks(), is(10));
     }
 
     @Test
-    public void testThenParkTruckAndLeave() {
+    public void testThenParkTruckToTruckSideAndLeave() {
         Vehicle vehicle = new Truck(2);
         Parking parking = new Parking001(10, 10);
         parking.parkCarToTruckSide(vehicle);
-
-        assertThat(parking.getArrayOfCarPlaces()[0], is(vehicle));
-        assertThat(parking.getArrayOfCarPlaces()[1], is(vehicle));
-        assertThat(parking.getArrayOfCarPlaces().length, is(1));
-        assertThat(parking.getArrayOfTruckPlaces().length, is(2));
-
+        assertThat(parking.getNumOfFreeSpacesForCars(), is(10));
+        assertThat(parking.getArrayOfTruckPlaces()[0], is(vehicle));
         parking.leaveParking(vehicle);
-
-        assertThat(parking.getArrayOfCarPlaces().length, is(0));
-        assertThat(parking.getArrayOfTruckPlaces().length, is(0));
+        assertThat(parking.getNumOfFreeSpacesForCars(), is(10));
+        assertThat(parking.getNumOfFreeSpacesForTrucks(), is(10));
     }
 
     @Test
@@ -75,27 +67,78 @@ public class Parking001Test {
     }
 
     @Test
-    public void testThenParkCarSideIfFull() {
+    public void testThenTryParkToParkToCarSideAndNoSpaceNextToEachOther() {
+        Vehicle vehicle1 = new Car();
+        Vehicle vehicle2 = new Car();
+        Vehicle vehicle3 = new Truck(3);
+        Parking parking = new Parking001(4, 1);
+        parking.parkCarToCarSide(vehicle1);
+        parking.parkCarToCarSide(vehicle2);
+        parking.leaveParking(vehicle1);
+        assertThat(parking.parkCarToCarSide(vehicle3), is(false));
+    }
+
+    @Test
+    public void testThenTryParkToParkToTruckSideAndNoSpaceNextToEachOther() {
+        Vehicle vehicle1 = new Truck(2);
+        Vehicle vehicle2 = new Truck(2);
+        Vehicle vehicle3 = new Truck(3);
+        Parking parking = new Parking001(0, 6);
+        parking.parkCarToTruckSide(vehicle1);
+        parking.parkCarToTruckSide(vehicle2);
+        parking.leaveParking(vehicle1);
+        assertThat(parking.parkCarToCarSide(vehicle3), is(false));
+    }
+
+    @Test
+    public void testThenTryParkToCarSideToTheLastSlot() {
         Vehicle vehicle1 = new Car();
         Vehicle vehicle2 = new Car();
         Vehicle vehicle3 = new Car();
+        Parking parking = new Parking001(3, 0);
+        parking.parkCarToTruckSide(vehicle1);
+        parking.parkCarToTruckSide(vehicle2);
+        assertThat(parking.parkCarToCarSide(vehicle3), is(true));
+    }
+
+    @Test
+    public void testThenTryParkToTruckSideToTheLastSlot() {
+        Vehicle vehicle1 = new Truck(2);
+        Vehicle vehicle2 = new Truck(2);
+        Vehicle vehicle3 = new Truck(2);
+        Parking parking = new Parking001(0, 6);
+        parking.parkCarToTruckSide(vehicle1);
+        parking.parkCarToTruckSide(vehicle2);
+        assertThat(parking.parkCarToTruckSide(vehicle3), is(true));
+    }
+
+    @Test
+    public void testThenParkCarSideIfFull() {
+        Vehicle vehicle1 = new Car();
+        Vehicle vehicle2 = new Truck(2);
+        Vehicle vehicle3 = new Truck(2);
         Parking parking = new Parking001(2, 2);
-        assertThat(parking.parkCarToTruckSide(vehicle3), is(true));
-        assertThat(parking.parkCarToTruckSide(vehicle3), is(true));
+        assertThat(parking.parkCarToCarSide(vehicle1), is(true));
+        assertThat(parking.parkCarToTruckSide(vehicle2), is(true));
+        assertThat(parking.parkCarToCarSide(vehicle3), is(false));
         assertThat(parking.parkCarToTruckSide(vehicle3), is(false));
     }
 
     @Test
-    public void testThenCheckIfCarSideIfFull() {
+    public void testThenCheckIfCarSideIsEmptyThenIsFull() {
         Vehicle vehicle = new Car();
         Parking parking = new Parking001(1, 1);
+        assertThat(parking.isCarSideIsFull(), is(false));
+        parking.parkCarToCarSide(vehicle);
         assertThat(parking.isCarSideIsFull(), is(true));
     }
 
     @Test
-    public void testThenCheckIfTruckSideIfFull() {
+    public void testThenCheckIfTruckSideIsEmptyThenIsFull() {
         Vehicle vehicle = new Truck(2);
         Parking parking = new Parking001(1, 2);
+        assertThat(parking.isTruckSideIsFull(), is(false));
+        parking.parkCarToTruckSide(vehicle);
         assertThat(parking.isTruckSideIsFull(), is(true));
     }
 
@@ -104,10 +147,10 @@ public class Parking001Test {
         Vehicle vehicle1 = new Car();
         Vehicle vehicle2 = new Truck(2);
         Parking parking = new Parking001(10, 10);
-        parking.parkCarToTruckSide(vehicle1);
+        parking.parkCarToCarSide(vehicle1);
         parking.parkCarToTruckSide(vehicle2);
-        assertThat(parking.getNumOfFreeSpacesForCars(), is(99));
-        assertThat(parking.getNumOfFreeSpacesForTrucks(), is(98));
+        assertThat(parking.getNumOfFreeSpacesForCars(), is(9));
+        assertThat(parking.getNumOfFreeSpacesForTrucks(), is(8));
     }
 
     @Test
@@ -115,16 +158,38 @@ public class Parking001Test {
         Vehicle vehicle1 = new Car();
         Vehicle vehicle2 = new Truck(2);
         Parking parking = new Parking001(10, 10);
-        parking.parkCarToTruckSide(vehicle1);
+        parking.parkCarToCarSide(vehicle1);
         parking.parkCarToTruckSide(vehicle2);
         assertThat(parking.getNumOfOccSpacesForCars(), is(1));
         assertThat(parking.getNumOfOccSpacesForTrucks(), is(2));
     }
 
     @Test
-    public void testThenCheckIsVehicleParked() {
+    public void testThenCheckIsVehicleParkedToCarSide() {
         Vehicle vehicle = new Car();
         Parking parking = new Parking001(10, 10);
+        parking.parkCarToCarSide(vehicle);
         assertThat(parking.isVehicleParked(vehicle), is(true));
+    }
+
+    @Test
+    public void testThenCheckIsVehicleParkedToTruckSide() {
+        Vehicle vehicle = new Truck(2);
+        Parking parking = new Parking001(10, 10);
+        parking.parkCarToTruckSide(vehicle);
+        assertThat(parking.isVehicleParked(vehicle), is(true));
+    }
+
+    @Test
+    public void testThenTryParkToNullParking() {
+        Vehicle vehicle = new Truck(2);
+        Parking parking = new Parking001(0, 0);
+        assertThat(parking.parkCarToCarSide(vehicle), is(false));
+        assertThat(parking.parkCarToTruckSide(vehicle), is(false));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testTryToCreate1SizeParkPlaceTruck() {
+        new Truck(1);
     }
 }
