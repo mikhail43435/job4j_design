@@ -1,6 +1,6 @@
-package ru.job4j.design.parking.parking;
+package ru.job4j.design.lsp.parking.parking;
 
-import ru.job4j.design.parking.vehicle.Vehicle;
+import ru.job4j.design.lsp.parking.vehicle.Vehicle;
 
 import java.util.Arrays;
 import java.util.function.Consumer;

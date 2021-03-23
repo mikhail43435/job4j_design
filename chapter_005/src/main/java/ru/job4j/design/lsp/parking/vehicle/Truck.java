@@ -1,4 +1,4 @@
-package ru.job4j.design.parking.vehicle;
+package ru.job4j.design.lsp.parking.vehicle;
 
 public class Truck extends Vehicle {
 

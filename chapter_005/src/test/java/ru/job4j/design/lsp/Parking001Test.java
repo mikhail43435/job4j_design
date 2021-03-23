@@ -1,14 +1,14 @@
-package ru.job4j.design.parking;
+package ru.job4j.design.lsp;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 import org.junit.Test;
-import ru.job4j.design.parking.parking.Parking;
-import ru.job4j.design.parking.parking.Parking001;
-import ru.job4j.design.parking.vehicle.Car;
-import ru.job4j.design.parking.vehicle.Truck;
-import ru.job4j.design.parking.vehicle.Vehicle;
+import ru.job4j.design.lsp.parking.parking.Parking;
+import ru.job4j.design.lsp.parking.vehicle.Car;
+import ru.job4j.design.lsp.parking.vehicle.Vehicle;
+import ru.job4j.design.lsp.parking.parking.Parking001;
+import ru.job4j.design.lsp.parking.vehicle.Truck;
 
 public class Parking001Test {
 
