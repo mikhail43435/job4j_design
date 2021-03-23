@@ -25,6 +25,10 @@ public abstract class Storage {
         return name;
     }
 
+    public void clearStorage() {
+        items.clear();
+    }
+
     public void display() {
         System.out.println("======================");
         System.out.println(this.getName());

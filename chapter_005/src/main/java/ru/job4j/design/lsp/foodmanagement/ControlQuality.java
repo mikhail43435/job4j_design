@@ -42,6 +42,20 @@ public class ControlQuality {
         return storeList;
     }
 
+    /**
+     * 1. Необходимо добавить динамическое распределение продуктов.
+     * 2. В классе ControllQuality добавить методы resort();
+     * он должен извлекать все продукты и перераспределять их заново.
+     */
+    public void resort() {
+        List<Food> tempList = new ArrayList<>();
+        storeList.forEach(e -> {
+            tempList.addAll(e.getItemsList());
+            e.clearStorage();
+        });
+        tempList.forEach(this::processFood);
+    }
+
     public void displayStorage() {
         storeList.forEach(Storage::display);
     }
